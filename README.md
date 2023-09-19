@@ -43,7 +43,7 @@ Implement the [GetProductCategoryReport](ShopReports/Services/ProductReportServi
 
 Implement the [GetProductReport](ShopReports/Services/ProductReportService.cs#L22) method of the *ProductReportService* class:
 * The method must return an instance of the [ProductReport](ShopReports/Reports/ProductReport.cs) class.
-* A report must contain all products sorted by a product title.
+* A report must contain all products sorted by a product title (descending).
 * Each report line must have a product title identifier, product title, manufacturer name and unit price.
 
 
@@ -51,7 +51,7 @@ Implement the [GetProductReport](ShopReports/Services/ProductReportService.cs#L2
 
 Implement the [GetFullProductReport](ShopReports/Services/ProductReportService.cs#L28) method of the *ProductReportService* class:
 * The method must return an instance of the [FullProductReport](ShopReports/Reports/FullProductReport.cs) class.
-* A report must contain all products sorted by a product title (descending).
+* A report must contain all products sorted by a product title.
 * Each report line must have a product title identifier, product title, product category identifier, manufacturer name, unit price and a product category name.
 
 

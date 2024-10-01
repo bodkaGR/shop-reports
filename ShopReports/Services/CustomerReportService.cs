@@ -27,10 +27,8 @@ namespace ShopReports.Services
                             SalesRevenue = customerGroup.Sum(od => od.PriceWithDiscount),
                         };
 
-            // Step 2: Order by the total sales in descending order
             var sortedQuery = query.OrderByDescending(reportLine => reportLine.SalesRevenue).ToList();
 
-            // Step 4: Return the report
             return new CustomerSalesRevenueReport(sortedQuery, DateTime.Now);
         }
     }

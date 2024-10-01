@@ -13,8 +13,8 @@ namespace ShopReports.Models
         [Column("location_address")]
         public string Address { get; set; }
 
-        [Column("location_city_id")]
         [ForeignKey("City")]
+        [Column("location_city_id")]
         public int CityId { get; set; }
 
         public City City { get; set; }

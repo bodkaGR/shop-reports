@@ -9,6 +9,16 @@ namespace ShopReports.Models
         {
         }
 
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Customer>()
+                .HasOne(p => p.Person)
+                .WithOne(p => p.Customer)
+                .HasForeignKey<Customer>(t => t.Id);
+
+            base.OnModelCreating(modelBuilder);
+        }
+
         public DbSet<Category> Categories { get; set; }
 
         public DbSet<Product> Products { get; set; }

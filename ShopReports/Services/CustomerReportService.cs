@@ -15,8 +15,23 @@ namespace ShopReports.Services
 
         public CustomerSalesRevenueReport GetCustomerSalesRevenueReport()
         {
-            // TODO Implement the service method.
-            throw new NotImplementedException();
+            IQueryable<CustomerSalesRevenueReportLine> query = from customer in this.shopContext.Customers
+                        join order in this.shopContext.Orders on customer.Id equals order.CustomerId
+                        join orderDetail in this.shopContext.OrderDetails on order.Id equals orderDetail.OrderId
+                        group orderDetail by new { customer.Id, customer.Person.FirstName, customer.Person.LastName } into customerGroup
+                        select new CustomerSalesRevenueReportLine
+                        {
+                            CustomerId = customerGroup.Key.Id,
+                            PersonFirstName = customerGroup.Key.FirstName,
+                            PersonLastName = customerGroup.Key.LastName,
+                            SalesRevenue = customerGroup.Sum(od => od.PriceWithDiscount),
+                        };
+
+            // Step 2: Order by the total sales in descending order
+            var sortedQuery = query.OrderByDescending(reportLine => reportLine.SalesRevenue).ToList();
+
+            // Step 4: Return the report
+            return new CustomerSalesRevenueReport(sortedQuery, DateTime.Now);
         }
     }
 }
